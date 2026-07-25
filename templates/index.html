@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Object Lens</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="intro">
+        <p class="eyebrow">Computer vision demo</p>
+        <h1>See what your image<br><em>contains.</em></h1>
+        <p class="lede">Upload a photo and let the trained classifier identify the objects it sees.</p>
+      </section>
+
+      <section class="workspace">
+        <form class="upload-card" method="post" enctype="multipart/form-data">
+          <label class="drop-zone" for="image">
+            <span class="upload-icon">↥</span>
+            <span class="upload-title">Drop an image here</span>
+            <span class="upload-copy">or click to browse · JPG, PNG, WebP · max 10 MB</span>
+            <img id="preview" class="preview{% if image_data %} visible{% endif %}"{% if image_data %} src="data:image/*;base64,{{ image_data }}"{% endif %} alt="Selected image preview">
+          </label>
+          <input id="image" name="image" type="file" accept="image/jpeg,image/png,image/webp" required>
+          <button type="submit">Classify image <span>→</span></button>
+        </form>
+
+        {% if error %}
+          <p class="message error">{{ error }}</p>
+        {% elif detections is not none %}
+          <section class="results" aria-live="polite">
+            <div class="results-header">
+              <p class="eyebrow">Analysis complete</p>
+              <h2>{% if detections %}Objects found{% else %}No match found{% endif %}</h2>
+            </div>
+            {% if detections %}
+              <div class="result-list">
+                {% for item in detections %}
+                  <article class="result-item">
+                    <div class="result-row"><strong>{{ item.label }}</strong><span>{{ '%.0f'|format(item.confidence * 100) }}%</span></div>
+                    <div class="meter"><i style="width: {{ item.confidence * 100 }}%"></i></div>
+                    <small>{{ item.votes }} agreeing image regions</small>
+                  </article>
+                {% endfor %}
+              </div>
+            {% else %}
+              <p class="empty">Try a closer or clearer photo of a trained object class.</p>
+            {% endif %}
+          </section>
+        {% endif %}
+      </section>
+    </main>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+  </body>
+</html>

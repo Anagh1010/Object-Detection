@@ -12,4 +12,5 @@ test.jpg
 test1.jpeg
 update_cell.py
 update_notebook.py
-venv/
+.venv/
+__pycache__/
