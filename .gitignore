@@ -6,7 +6,6 @@ Dataset/
 extract_backup.py
 format_notebook.py
 Object_Detection_Original.ipynb
-saved_model/
 split_cells.py
 test.jpg
 test1.jpeg
