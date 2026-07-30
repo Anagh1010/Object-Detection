@@ -16,7 +16,7 @@ from PIL import Image
 
 BASE_DIR = Path(__file__).resolve().parent
 SAVE_DIR = BASE_DIR / "saved_model"
-TORCH_HOME = BASE_DIR / "venv" / "torch_models"
+TORCH_HOME = BASE_DIR / ".venv" / "torch_models"
 
 # Keep downloaded torchvision weights inside the project when possible.
 os.environ.setdefault("TORCH_HOME", str(TORCH_HOME))
