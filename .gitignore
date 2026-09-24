@@ -13,3 +13,4 @@ update_cell.py
 update_notebook.py
 .venv/
 __pycache__/
+fast_rcnn_first/
