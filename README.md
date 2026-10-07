@@ -2,7 +2,7 @@
 
 An end-to-end computer vision and machine learning project trained on the **Pascal VOC 2012** benchmark dataset (17,125 images, 40,138 object instances across 20 classes).
 
-This repository combines a **14-section Exploratory Data Analysis**, **multi-method feature selection**, **ResNet-50 CNN embeddings**, **three classical ML classifiers** compared with rigorous **statistical hypothesis testing**, and a **Faster R-CNN end-to-end detection** pipeline — served through an interactive **Flask** web application.
+This repository combines a **14-section Exploratory Data Analysis**, **multi-method feature selection**, **ResNet-50 CNN embeddings**, and **three classical ML classifiers** compared with rigorous **statistical hypothesis testing** — served through an interactive **Flask** web application.
 
 ---
 
@@ -79,16 +79,7 @@ Evaluation: Accuracy, Weighted F1, Macro F1, Weighted Precision, Weighted Recall
 | **ANOVA** | Variance analysis across model score distributions |
 | **Nemenyi Post-Hoc Test** | Pairwise p-value matrix (via `scikit-posthocs`) |
 
-### 6. End-to-End Object Detection (Faster R-CNN ResNet-50-FPN-v2)
-
-- **Backbone**: ResNet-50 with Feature Pyramid Network (FPN v2) for multi-scale feature maps.
-- **Region Proposal Network (RPN)**: Proposes candidate bounding boxes directly from feature maps.
-- **RoI Head**: `FastRCNNPredictor` with RoIAlign pooling — outputs exact bounding box coordinates and class confidence scores in a single forward pass.
-- **21 classes**: 20 VOC object classes + background (index 0).
-- Custom `VOCDetectionDataset` PyTorch `Dataset` with horizontal-flip augmentation and support for `train.txt` / `val.txt` ImageSets splits.
-- Trained with SGD (`lr=0.005`, momentum=0.9, weight decay=5e-4) + `StepLR` scheduler.
-
-### 7. Web Deployment & Inference Engine
+### 6. Web Deployment & Inference Engine
 
 - **Flask Web Application** (`app.py`): Upload JPG, PNG, or WebP photos to view detected objects and confidence meters.
 - **Inference** (`detect.py`): Multi-scale sliding-window crop generation (scale fractions: 0.8, 0.6, 0.4, stride 30%) with consensus voting to minimise false positives. Confidence threshold: 0.8, minimum votes: 4.
@@ -178,7 +169,7 @@ jupyter lab Object_Detection.ipynb
 
 ## 🛠 Tech Stack
 
-- **Deep Learning**: PyTorch, Torchvision (ResNet-50, Faster R-CNN FPN v2)
+- **Deep Learning**: PyTorch, Torchvision (ResNet-50 embeddings)
 - **Feature Selection**: scikit-learn (`mutual_info_classif`, PCA), skrebate (`ReliefF`)
 - **Statistical Testing**: SciPy (`scipy.stats`), scikit-posthocs (`posthoc_nemenyi_friedman`)
 - **Machine Learning**: scikit-learn (Logistic Regression, Random Forest, Decision Tree, Pipelines, StratifiedKFold, StandardScaler, Metrics)
